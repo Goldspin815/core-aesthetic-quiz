@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Which Core Aesthetic Are You? ✨</title>
+    <meta name="description" content="Discover your core aesthetic with this viral personality quiz! Are you Dreamcore, Cottagecore, Dark Academia, or Minimalist Chic?">
+    
+    <!-- Social Media Meta Tags -->
+    <meta property="og:title" content="Which Core Aesthetic Are You? ✨">
+    <meta property="og:description" content="Take this viral quiz to discover your true aesthetic vibe!">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 700px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+        }
+        
+        /* Landing Page Styles */
+        .landing-page {
+            text-align: center;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        .main-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        
+        .main-subtitle {
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+        
+        .aesthetic-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .aesthetic-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .aesthetic-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 16px;
+        }
+        
+        .aesthetic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .aesthetic-card:hover::before {
+            opacity: 1;
+        }
+        
+        .dreamcore-card::before {
+            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+        }
+        
+        .cottagecore-card::before {
+            background: linear-gradient(135deg, #a8e6cf, #dcedc1);
+        }
+        
+        .dark-academia-card::before {
+            background: linear-gradient(135deg, #2c1810, #8b4513);
+        }
+        
+        .minimalist-card::before {
+            background: linear-gradient(135deg, #f7f7f7, #e8e8e8);
+        }
+        
+        .aesthetic-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            display: block;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .aesthetic-name {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #333;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .start-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .start-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .start-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+        }
+        
+        .start-button:hover::before {
+            left: 100%;
+        }
+        
+        .quiz-stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 25px 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        /* Quiz Styles */
+        .quiz-container {
+            display: none;
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .quiz-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+        
+        .quiz-subtitle {
+            font-size: 1rem;
+            color: #666;
+            font-weight: 400;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+        
+        .question-container {
+            margin-bottom: 30px;
+        }
+        
+        .question-number {
+            font-size: 0.9rem;
+            color: #999;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        .question-text {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 25px;
+            line-height: 1.4;
+        }
+        
+        .answers-grid {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .answer-option {
+            background: #f8f9fa;
+            border: 2px solid transparent;
+            border-radius: 16px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .answer-option:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .answer-option.selected {
+            border-color: #667eea;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+        }
+        
+        .answer-text {
+            font-weight: 500;
+            color: #333;
+            font-size: 1rem;
+        }
+        
+        .next-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 15px 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .next-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        .next-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .result-container {
+            text-align: center;
+            display: none;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        .result-aesthetic {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .result-vibe {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding: 8px 20px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        
+        .result-description {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+        
+        .color-palette {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .color-swatch {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .share-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .share-button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 0.9rem;
+        }
+        
+        .share-tiktok {
+            background: #000;
+            color: white;
+        }
+        
+        .share-pinterest {
+            background: #e60023;
+            color: white;
+        }
+        
+        .share-instagram {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            color: white;
+        }
+        
+        .retake-button {
+            background: transparent;
+            border: 2px solid #667eea;
+            color: #667eea;
+            border-radius: 10px;
+            padding: 12px 24px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .retake-button:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        /* Aesthetic-specific styling */
+        .dreamcore {
+            background: linear-gradient(135deg, #ff9a9e, #fecfef, #fecfef);
+            color: #4a4a4a;
+        }
+        
+        .cottagecore {
+            background: linear-gradient(135deg, #a8e6cf, #dcedc1, #ffd3a5);
+            color: #2d5016;
+        }
+        
+        .dark-academia {
+            background: linear-gradient(135deg, #2c1810, #8b4513, #d2691e);
+            color: #f4f4f4;
+        }
+        
+        .minimalist-chic {
+            background: linear-gradient(135deg, #f7f7f7, #e8e8e8, #d1d1d1);
+            color: #2c2c2c;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+                margin: 10px;
+            }
+            
+            .main-title {
+                font-size: 2.2rem;
+            }
+            
+            .quiz-title {
+                font-size: 1.8rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .share-buttons {
+                flex-direction: column;
+            }
+            
+            .aesthetic-preview {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .quiz-stats {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="floating-elements">
+            <div class="floating-element" style="top: 10%; left: 10%; font-size: 2rem;">✨</div>
+            <div class="floating-element" style="top: 20%; right: 15%; font-size: 1.5rem;">🌙</div>
+            <div class="floating-element" style="bottom: 20%; left: 20%; font-size: 1.8rem;">🌿</div>
+            <div class="floating-element" style="bottom: 30%; right: 10%; font-size: 1.6rem;">📚</div>
+        </div>
+        
+        <!-- Landing Page -->
+        <div class="landing-page" id="landingPage">
+            <h1 class="main-title">Which Core Aesthetic Are You?</h1>
+            <p class="main-subtitle">Discover your true vibe with our viral personality quiz ✨</p>
+            
+            <div class="quiz-stats">
+                <div class="stat-item">
+                    <span>⏱️</span>
+                    <span>2 minutes</span>
+                </div>
+                <div class="stat-item">
+                    <span>❓</span>
+                    <span>10 questions</span>
+                </div>
+                <div class="stat-item">
+                    <span>🎯</span>
+                    <span>4 aesthetics</span>
+                </div>
+            </div>
+            
+            <div class="aesthetic-preview">
+                <div class="aesthetic-card dreamcore-card">
+                    <span class="aesthetic-emoji">🌙</span>
+                    <div class="aesthetic-name">Dreamcore</div>
+                </div>
+                <div class="aesthetic-card cottagecore-card">
+                    <span class="aesthetic-emoji">🌿</span>
+                    <div class="aesthetic-name">Cottagecore</div>
+                </div>
+                <div class="aesthetic-card dark-academia-card">
+                    <span class="aesthetic-emoji">📚</span>
+                    <div class="aesthetic-name">Dark Academia</div>
+                </div>
+                <div class="aesthetic-card minimalist-card">
+                    <span class="aesthetic-emoji">🤍</span>
+                    <div class="aesthetic-name">Minimalist Chic</div>
+                </div>
+            </div>
+            
+            <button class="start-button" onclick="startQuiz()">
+                Start Quiz ✨
+            </button>
+        </div>
+        
+        <!-- Quiz Container -->
+        <div class="quiz-container" id="quizContainer">
+            <div class="quiz-header">
+                <h1 class="quiz-title">Which Core Aesthetic Are You?</h1>
+                <p class="quiz-subtitle">Answer honestly for the most accurate result ✨</p>
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            
+            <div id="quizContent">
+                <div class="question-container">
+                    <div class="question-number" id="questionNumber">Question 1 of 10</div>
+                    <h2 class="question-text" id="questionText"></h2>
+                    <div class="answers-grid" id="answersGrid"></div>
+                    <button class="next-button" id="nextButton" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Results -->
+        <div class="result-container" id="resultContainer">
+            <h2 class="result-aesthetic" id="resultAesthetic"></h2>
+            <div class="result-vibe" id="resultVibe"></div>
+            <p class="result-description" id="resultDescription"></p>
+            <div class="color-palette" id="colorPalette"></div>
+            
+            <div class="share-buttons">
+                <button class="share-button share-tiktok" onclick="shareToTikTok()">Share on TikTok</button>
+                <button class="share-button share-pinterest" onclick="shareToPinterest()">Pin It</button>
+                <button class="share-button share-instagram" onclick="shareToInstagram()">Share Story</button>
+            </div>
+            
+            <button class="retake-button" onclick="retakeQuiz()">Take Quiz Again</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "Pick your ideal weekend escape:",
+                answers: [
+                    { text: "🌙 Wandering through a surreal night market with floating lanterns", aesthetic: "dreamcore" },
+                    { text: "🌿 Baking bread in a cozy cottage surrounded by wildflowers", aesthetic: "cottagecore" },
+                    { text: "📚 Getting lost in an ancient library with leather-bound books", aesthetic: "dark-academia" },
+                    { text: "🏛️ Exploring a minimalist art gallery in perfect silence", aesthetic: "minimalist-chic" }
+                ]
+            },
+            {
+                question: "Your dream outfit vibe is:",
+                answers: [
+                    { text: "✨ Iridescent fabrics that shift colors in different lights", aesthetic: "dreamcore" },
+                    { text: "🌻 Flowing linen dresses with hand-embroidered details", aesthetic: "cottagecore" },
+                    { text: "🖤 Tailored blazers, vintage watches, and leather accessories", aesthetic: "dark-academia" },
+                    { text: "🤍 Clean lines, neutral tones, and perfectly fitted silhouettes", aesthetic: "minimalist-chic" }
+                ]
+            },
+            {
+                question: "The color that speaks to your soul:",
+                answers: [
+                    { text: "💜 Holographic pastels that seem to glow from within", aesthetic: "dreamcore" },
+                    { text: "💚 Sage green like morning mist over meadows", aesthetic: "cottagecore" },
+                    { text: "🤎 Deep burgundy like aged wine and autumn leaves", aesthetic: "dark-academia" },
+                    { text: "🤍 Pure white with subtle warm undertones", aesthetic: "minimalist-chic" }
+                ]
+            },
+            {
+                question: "Your ideal living space feels like:",
+                answers: [
+                    { text: "🌈 A cloud palace with rooms that change based on your mood", aesthetic: "dreamcore" },
+                    { text: "🏡 A farmhouse kitchen filled with herbs and homemade preserves", aesthetic: "cottagecore" },
+                    { text: "📖 A study lined with books, vintage maps, and candlelight", aesthetic: "dark-academia" },
+                    { text: "🏢 An open loft with clean lines and carefully curated objects", aesthetic: "minimalist-chic" }
+                ]
+            },
+            {
+                question: "When you daydream, you imagine:",
+                answers: [
+                    { text: "🦋 Flying through cotton candy clouds in a world without gravity", aesthetic: "dreamcore" },
+                    { text: "🌾 Tending a secret garden where every plant has a story", aesthetic: "cottagecore" },
+                    { text: "🕯️ Solving mysteries in candlelit libraries during thunderstorms", aesthetic: "dark-academia" },
+                    { text: "🌅 Standing alone on a pristine mountaintop at sunrise", aesthetic: "minimalist-chic" }
+                ]
+            },
+            {
+                question: "Your perfect creative outlet:",
+                answers: [
+                    { text: "🎨 Digital art that bends reality and plays with impossible physics", aesthetic: "dreamcore" },
+                    { text: "🧶 Hand-knitting scarves while listening to folk music", aesthetic: "cottagecore" },
+                    { text: "✍️ Writing poetry by candlelight in leather-bound journals", aesthetic: "dark-academia" },
+                    { text: "📐 Designing spaces with perfect proportions and negative space", aesthetic: "minimalist-chic" }
+                ]
+            },
+            {
+                question: "The energy you want to radiate:",
+                answers: [
+                    { text: "✨ Mysterious and otherworldly, like you hold cosmic secrets", aesthetic: "dreamcore" },
+                    { text: "🌸 Warm and nurturing, like a hug from your favorite person", aesthetic: "cottagecore" },
+                    { text: "🔮 Intellectually magnetic with an air of elegant mystery", aesthetic: "dark-academia" },
+                    { text: "💎 Quietly powerful, with an understated confidence", aesthetic: "minimalist-chic" }
+                ]
+            },
+            {
+                question: "Your ideal social media feed looks like:",
+                answers: [
+                    { text: "🌌 Surreal landscapes, glitch art, and photos that feel like dreams", aesthetic: "dreamcore" },
+                    { text: "🌼 Homemade bread, pressed flowers, and golden hour garden photos", aesthetic: "cottagecore" },
+                    { text: "📜 Vintage books, coffee shops, and moody architectural details", aesthetic: "dark-academia" },
+                    { text: "⚪ Clean layouts, geometric shapes, and perfectly curated objects", aesthetic: "minimalist-chic" }
+                ]
+            },
+            {
+                question: "Your dream vacation destination:",
+                answers: [
+                    { text: "🏝️ A floating island where the laws of physics don't apply", aesthetic: "dreamcore" },
+                    { text: "🏔️ A remote cabin in the mountains with a vegetable garden", aesthetic: "cottagecore" },
+                    { text: "🏰 An ancient castle library in the Scottish Highlands", aesthetic: "dark-academia" },
+                    { text: "🏛️ A modern architectural masterpiece overlooking the ocean", aesthetic: "minimalist-chic" }
+                ]
+            },
+            {
+                question: "The playlist that matches your vibe:",
+                answers: [
+                    { text: "🎵 Ambient electronic with ethereal vocals and cosmic sounds", aesthetic: "dreamcore" },
+                    { text: "🎶 Folk acoustic with nature sounds and gentle harmonies", aesthetic: "cottagecore" },
+                    { text: "🎼 Classical piano mixed with indie folk and vintage jazz", aesthetic: "dark-academia" },
+                    { text: "🎧 Minimal techno with clean beats and atmospheric soundscapes", aesthetic: "minimalist-chic" }
+                ]
+            }
+        ];
+
+        const aesthetics = {
+            dreamcore: {
+                name: "Dreamcore",
+                vibe: "Ethereal • Whimsical • Limitless",
+                description: "You exist between dreams and reality, finding magic in the impossible. Your soul dances with stardust and whispers to the moon.",
+                colors: ["#ff9a9e", "#fecfef", "#a8edea", "#fed6e3"],
+                gradient: "linear-gradient(135deg, #ff9a9e, #fecfef, #fecfef)"
+            },
+            cottagecore: {
+                name: "Cottagecore",
+                vibe: "Nurturing • Grounded • Gentle",
+                description: "You are the warmth of fresh bread and morning sunlight. Your heart blooms like wildflowers in an endless spring.",
+                colors: ["#a8e6cf", "#dcedc1", "#ffd3a5", "#c7a27c"],
+                gradient: "linear-gradient(135deg, #a8e6cf, #dcedc1, #ffd3a5)"
+            },
+            "dark-academia": {
+                name: "Dark Academia",
+                vibe: "Mysterious • Intellectual • Timeless",
+                description: "You are candlelit wisdom and vintage secrets. Your mind is a library of beautiful, haunting thoughts.",
+                colors: ["#2c1810", "#8b4513", "#d2691e", "#daa520"],
+                gradient: "linear-gradient(135deg, #2c1810, #8b4513, #d2691e)"
+            },
+            "minimalist-chic": {
+                name: "Minimalist Chic",
+                vibe: "Refined • Intentional • Powerful",
+                description: "You are the poetry of empty spaces and perfect lines. Your presence speaks volumes in elegant silence.",
+                colors: ["#f7f7f7", "#e8e8e8", "#d1d1d1", "#b8b8b8"],
+                gradient: "linear-gradient(135deg, #f7f7f7, #e8e8e8, #d1d1d1)"
+            }
+        };
+
+        let currentQuestion = 0;
+        let answers = [];
+        let selectedAnswer = null;
+
+        function startQuiz() {
+            document.getElementById('landingPage').style.display = 'none';
+            document.getElementById('quizContainer').style.display = 'block';
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const question = questions[currentQuestion];
+            document.getElementById('questionNumber').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            document.getElementById('questionText').textContent = question.question;
+            
+            const answersGrid = document.getElementById('answersGrid');
+            answersGrid.innerHTML = '';
+            
+            question.answers.forEach((answer, index) => {
+                const answerDiv = document.createElement('div');
+                answerDiv.className = 'answer-option';
+                answerDiv.innerHTML = `<span class="answer-text">${answer.text}</span>`;
+                answerDiv.onclick = () => selectAnswer(index, answerDiv);
+                answersGrid.appendChild(answerDiv);
+            });
+            
+            updateProgress();
+            document.getElementById('nextButton').disabled = true;
+            selectedAnswer = null;
+        }
+
+        function selectAnswer(index, element) {
+            document.querySelectorAll('.answer-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            element.classList.add('selected');
+            selectedAnswer = index;
+            document.getElementById('nextButton').disabled = false;
+        }
+
+        function nextQuestion() {
+            if (selectedAnswer === null) return;
+            
+            answers.push(questions[currentQuestion].answers[selectedAnswer].aesthetic);
+            currentQuestion++;
+            
+            if (currentQuestion < questions.length) {
+                showQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function showResults() {
+            const counts = {};
+            answers.forEach(answer => {
+                counts[answer] = (counts[answer] || 0) + 1;
+            });
+            
+            const result = Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
+            const aesthetic = aesthetics[result];
+            
+            document.getElementById('quizContainer').style.display = 'none';
+            document.getElementById('resultContainer').style.display = 'block';
+            
+            const container = document.querySelector('.container');
+            container.style.background = aesthetic.gradient;
+            container.className = `container ${result}`;
+            
+            document.getElementById('resultAesthetic').textContent = aesthetic.name;
+            document.getElementById('resultVibe').textContent = aesthetic.vibe;
+            document.getElementById('resultDescription').textContent = aesthetic.description;
+            
+            const colorPalette = document.getElementById('colorPalette');
+            colorPalette.innerHTML = '';
+            aesthetic.colors.forEach(color => {
+                const swatch = document.createElement('div');
+                swatch.className = 'color-swatch';
+                swatch.style.backgroundColor = color;
+                colorPalette.appendChild(swatch);
+            });
+            
+            const vibeElement = document.getElementById('resultVibe');
+            if (result === 'dark-academia') {
+                vibeElement.style.background = 'rgba(255, 255, 255, 0.1)';
+                vibeElement.style.color = '#f4f4f4';
+            } else {
+                vibeElement.style.background = 'rgba(0, 0, 0, 0.1)';
+                vibeElement.style.color = result === 'minimalist-chic' ? '#2c2c2c' : '#4a4a4a';
+            }
+        }
+
+        function retakeQuiz() {
+            currentQuestion = 0;
+            answers = [];
+            selectedAnswer = null;
+            
+            const container = document.querySelector('.container');
+            container.style.background = 'rgba(255, 255, 255, 0.95)';
+            container.className = 'container';
+            
+            document.getElementById('resultContainer').style.display = 'none';
+            document.getElementById('landingPage').style.display = 'block';
+        }
+
+        function shareToTikTok() {
+            const text = `I got ${document.getElementById('resultAesthetic').textContent}! ✨ Take the viral aesthetic quiz and discover your core vibe! #aesthetic #quiz #${document.getElementById('resultAesthetic').textContent.toLowerCase().replace(' ', '')}`;
+            navigator.clipboard.writeText(text);
+            alert('Caption copied! Open TikTok to share your result 📱');
+        }
+
+        function shareToPinterest() {
+            const url = encodeURIComponent(window.location.href);
+            const description = encodeURIComponent(`I'm ${document.getElementById('resultAesthetic').textContent}! Which core aesthetic are you? Take this viral quiz to find out! ✨`);
+            window.open(`https://pinterest.com/pin/create/button/?url=${url}&description=${description}`, '_blank');
+        }
+
+        function shareToInstagram() {
+            const text = `I got ${document.getElementById('resultAesthetic').textContent}! ✨ Which core aesthetic are you? Link in bio to take the quiz! #aesthetic #quiz #vibes`;
+            navigator.clipboard.writeText(text);
+            alert('Caption copied! Screenshot your result and share on Instagram Stories 📸');
+        }
+
+        document.getElementById('nextButton').onclick = nextQuestion;
+    </script>
+</body>
+</html>
